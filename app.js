@@ -1,43 +1,55 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
 const app = express();
-const PORT = 8000;
 
+const path = require("path");
+const fs = require("fs");
+
+const PORT = 8000;
+const bodyParser = require("body-parser");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(bodyParser.json());
+
+require("./lib/js/returnFiles")(app);
+
+
+// Filepath
+const db_Path = path.join(__dirname, "db", "db.json");
+
+
 
 // GET -----------------------
 
 app.get("/api/notes", function(req,res){
-  let noteData =  JSON.parse(fs.readFileSync(path.join(__dirname, "db", "db.json"), 'utf8'));
+  let noteData =  JSON.parse(fs.readFileSync(db_Path, 'utf8'));
    res.json(noteData);
 
 })    
-
-app.get("/notes", function(req,res){
-    res.sendFile(path.join(__dirname, "public", "notes.html"));
-})
-
-
-app.get("*", function(req,res){
-    res.sendFile(path.join(__dirname,"public", "index.html"));
-})
-
 // POST --------------------
 
+
 app.post("/api/notes", function(req,res){
-let dataStore = path.join(__dirname,"db", "db.json")
+let dataStore = db_Path;
+
+
+
 let noteContent = req.body;
-fs.dataStore.append(res)
-
-
-    
-})
 
 
 
+dataStore.push(noteContent);
+
+
+fs.writeFile(db_Path, JSON.stringify(dataStore),(err) => {
+    if (err) {
+      console.log(err); 
+    } 
+    else { 
+      console.log("functioned");
+    }
+  });
+});
 
 
 // LISTENER
