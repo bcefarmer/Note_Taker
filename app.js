@@ -11,18 +11,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(bodyParser.json());
 
-require("./lib/js/returnFiles")(app);
-
-
-// Filepath
-const db_Path = path.join(__dirname, "db", "db.json");
-
-
+require("./public/returnFiles")(app);
 
 // GET -----------------------
 
 app.get("/api/notes", function(req,res){
-  let noteData =  JSON.parse(fs.readFileSync(db_Path, 'utf8'));
+  let noteData =  JSON.parse(fs.readFileSync(path.join(__dirname, "db", "db.json"), 'utf8'));
    res.json(noteData);
 
 })    
@@ -30,7 +24,7 @@ app.get("/api/notes", function(req,res){
 
 
 app.post("/api/notes", function(req,res){
-let dataStore = db_Path;
+let dataStore = path.join(__dirname, "db", "db.json");
 
 
 
