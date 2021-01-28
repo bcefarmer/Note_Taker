@@ -1,7 +1,7 @@
 // EXPRESS
 const express = require("express");
 const app = express();
-const PORT = 8000;
+var PORT = process.env.PORT || 3001;
 
 
 // Filepaths & writing to files
