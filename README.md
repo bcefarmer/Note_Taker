@@ -16,11 +16,11 @@ The key to identifying notes for user actions is a UUID identifier, via an npm i
 
 I chose this method rather than auto-incrementing numbers because of the possibility that any numeric counters might accidently start over if THE server glitched.  If that happened, replicated values in DB.json would cause the API calls to have unintended consequences....especially with DELETE methods.
 
-![alt text](public\assets\uuidGenerated.jpg "creation of uuid upon api POST.") 
+![alt text](public/assets/uuidGenerated.jpg "creation of uuid upon api POST.") 
 
 During note deletion (performed by clicking on the red trash-can icon) a simple for-loop with a conditional break finds the appropriate uuid.
 
-![alt text](public\assets\loopWithBreak.jpg "For loop.") 
+![alt text](public/assets/loopWithBreak.jpg "For loop.") 
 
 Simple processes are used for VIEWING notes.  This is accomplished by simply clicking on a note.
 
