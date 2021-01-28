@@ -13,7 +13,7 @@ const getNotes = () => {
     url: "/api/notes",
     method: "GET",
   });
-}
+};
 
 // A function for saving a note to the db
 const saveNote = (note) => {
@@ -22,19 +22,17 @@ const saveNote = (note) => {
     data: note,
     method: "POST",
   });
-}
+};
 
 // A function for deleting a note from the db
-const deleteNote = (identifier) => {
-  this.identifier = identifier;
-  console.log("UUID of current note = " + this.identifier);
+const deleteNote = (indentifier) => {
+  console.log("identifier is : " + indentifier);
+  this.indentifier = indentifier;
+  console.log("this.identifier is : " + this.identifier);
   return $.ajax({
-    url: "/api/notes/" + this.identifier,
+    url: "api/notes/" + this.indentifier,
     method: "DELETE",
-    contentType: "application/json",
-    responseType: "text"
-  })
-  
+  });
 };
 
 // If there is an activeNote, display it, otherwise render empty inputs
@@ -72,17 +70,19 @@ const handleNoteSave = function () {
 const handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
-  event.preventDefault();
    const note = $(this).parent(".list-group-item").data();
+   console.log("delete event started");
+  console.log(`const note = ${JSON.stringify(note)}`)
+  
   
 
  if (activeNote.uuid === note.uuid) {
-
+  console.log("true on activeNote.id === note.uuid")
   activeNote = {};
  }
 
   deleteNote(note.uuid).then(() => {
-    
+    console.log("completed deleteNote function")
     getAndRenderNotes();
     renderActiveNote();
   });
