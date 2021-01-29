@@ -18,7 +18,7 @@ This application allows a user to write notes, view notes and delete notes.
 ## UUID Dependence
 The key to identifying notes for user actions is a UUID identifier, via an npm install of module uuid.v4.  
 
-I chose this method rather than auto-incrementing numbers because of the possibility that any numeric counters might accidently start over if THE server glitched.  If that happened, replicated values in DB.json would cause the API calls to have unintended consequences....especially with DELETE methods.
+I chose this method rather than auto-incrementing numbers because of the possibility that any numeric counters might accidently start over if the server glitched.  If that happened, replicated values in DB.json would cause the API calls to have unintended consequences....especially with DELETE methods.
 
 ![alt text](public/assets/uuidGenerated.jpg "creation of uuid upon api POST.") 
 
